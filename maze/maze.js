@@ -4,6 +4,8 @@ class Maze {
       cols: 20,
       rows: 20,
       sizeCell: 20,
+      //cellArrX: [],
+      //cellArrY: [],
       colorWallR: 100,
       colorWallG: 100,
       colorWallB: 100,
@@ -28,17 +30,27 @@ class Maze {
       x: ((canvasWidth - (this.cols * this.sizeCell))/2),
       y: ((canvasHeight - (this.rows * this.sizeCell))/2)
     }
-
     return pos;
   };
 
+  changeCell(){
+    var blackOrWithe = Math.round(Math.random(0, 1));
+    console.log("blackOrWithe: ", blackOrWithe);
+    if (blackOrWithe == 0) {
+      fill(this.colorWallR, this.colorWallG, this.colorWallB);
+    } else {
+      fill(this.colorPathR, this.colorPathG, this.colorPathB);
+    }
+  }
+
   show(){
     //console.log(this)
-    fill(this.colorWallR, this.colorWallG, this.colorWallB);
+    
     for (var col = 0; col < this.cols; col++) {
       //colls
       for (var row = 0; row < this.rows; row++) {
         // rows
+        this.changeCell();
         rect(this.sizeCell * col, this.sizeCell * row, this.sizeCell, this.sizeCell);
       }
     }
