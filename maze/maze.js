@@ -4,23 +4,15 @@ class Maze {
       cols: 20,
       rows: 20,
       sizeCell: 20,
-      colorWallR: 100,
-      colorWallG: 100,
-      colorWallB: 100,
-      colorPathR: 255,
-      colorPathG: 255,
-      colorPathB: 255
+      colorWallRGB: {r:100,g:100,b:100},
+      colorPathRGB: {r:255,g:255,b:255}
     };
     
     this.cols = options.cols || defaults.cols;
     this.rows = options.rows || defaults.rows;
     this.sizeCell = options.sizeCell || defaults.sizeCell;
-    this.colorWallR = options.colorWallR || defaults.colorWallR;
-    this.colorWallG = options.colorWallG || defaults.colorWallG;
-    this.colorWallB = options.colorWallB || defaults.colorWallB;
-    this.colorPathR = options.colorPathR || defaults.colorPathR;
-    this.colorPathG = options.colorPathG || defaults.colorPathG;
-    this.colorPathB = options.colorPathB || defaults.colorPathB;
+    this.colorWallRGB = options.colorWallRGB || defaults.colorWallRGB;
+    this.colorPathRGB = options.colorPathRGB || defaults.colorPathRGB;
   };
   
   center(canvasWidth, canvasHeight){
@@ -35,11 +27,11 @@ class Maze {
     return Math.round(Math.random(0, 1));
   }
 
-  changeCell(blackOrWithe){
+  changeRawedCell(blackOrWithe){
     if (blackOrWithe == 0) {
-      fill(this.colorWallR, this.colorWallG, this.colorWallB);
+      fill(this.colorWallRGB.r, this.colorWallRGB.g, this.colorWallRGB.b);
     } else {
-      fill(this.colorPathR, this.colorPathG, this.colorPathB);
+      fill(this.colorPathRGB.r, this.colorPathRGB.g, this.colorPathRGB.b);
     }
   }
 
@@ -58,7 +50,7 @@ class Maze {
   show(){
     for (var row = 0; row < this.cellMap.length; row++) {
       for (var col = 0; col < this.cellMap[row].length; col++) {
-        this.changeCell(this.cellMap[row][col]);
+        this.changeRawedCell(this.cellMap[row][col]);
         rect(this.sizeCell * col, this.sizeCell * row, this.sizeCell, this.sizeCell);
       }
     }
