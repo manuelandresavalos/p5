@@ -4,8 +4,6 @@ class Maze {
       cols: 20,
       rows: 20,
       sizeCell: 20,
-      //cellArrX: [],
-      //cellArrY: [],
       colorWallR: 100,
       colorWallG: 100,
       colorWallB: 100,
@@ -33,9 +31,11 @@ class Maze {
     return pos;
   };
 
-  changeCell(){
-    var blackOrWithe = Math.round(Math.random(0, 1));
-    console.log("blackOrWithe: ", blackOrWithe);
+  binaryRandom(){
+    return Math.round(Math.random(0, 1));
+  }
+
+  changeCell(blackOrWithe){
     if (blackOrWithe == 0) {
       fill(this.colorWallR, this.colorWallG, this.colorWallB);
     } else {
@@ -43,16 +43,24 @@ class Maze {
     }
   }
 
-  show(){
-    //console.log(this)
-    
-    for (var col = 0; col < this.cols; col++) {
-      //colls
-      for (var row = 0; row < this.rows; row++) {
-        // rows
-        this.changeCell();
-        rect(this.sizeCell * col, this.sizeCell * row, this.sizeCell, this.sizeCell);
+  generate(){
+    let blackOrWithe = 0;
+    this.cellMap = new Array(); //Rows
+    for (var row = 0; row < this.rows; row++) {//Rows
+      this.cellMap[row] = new Array(); //Cols
+      for (var col = 0; col < this.cols; col++) {//Cols
+        blackOrWithe = this.binaryRandom();
+        this.cellMap[row][col] = blackOrWithe;
       }
     }
   };
+
+  show(){
+    for (var row = 0; row < this.cellMap.length; row++) {
+      for (var col = 0; col < this.cellMap[row].length; col++) {
+        this.changeCell(this.cellMap[row][col]);
+        rect(this.sizeCell * col, this.sizeCell * row, this.sizeCell, this.sizeCell);
+      }
+    }
+  }
 }

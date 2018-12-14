@@ -9,14 +9,22 @@ var canvasHeight = 600;
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
   background(51);
+
+	//Center the Maze on the middle of the stage
+	let pos = maze.center(canvasWidth, canvasHeight);
+	translate(pos.x, pos.y)
+  
+  maze.generate();
+  maze.show();
+
+  frameRate(3);
 }
 
 function draw() {
 	//Center the Maze on the middle of the stage
 	let pos = maze.center(canvasWidth, canvasHeight);
 	translate(pos.x, pos.y)
-
-	// Show Maze
+	
+	//Update the maze
   maze.show();
-  noLoop();
 }
