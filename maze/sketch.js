@@ -26,5 +26,6 @@ function draw() {
 	translate(pos.x, pos.y)
 	
 	//Update the maze
+	maze.step();
   maze.show();
 }
