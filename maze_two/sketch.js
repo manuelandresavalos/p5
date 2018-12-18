@@ -15,7 +15,7 @@ function setup() {
 	maze.generate();
   maze.show();
 
-  //frameRate(5);
+  frameRate(5);
 }
 
 function draw() {

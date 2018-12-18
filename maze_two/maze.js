@@ -11,9 +11,9 @@ class Maze {
     this.cols = options.cols || defaults.cols;
     this.rows = options.rows || defaults.rows;
     this.cellSize = options.cellSize || defaults.cellSize;
-    this.cellCol = 0;
-    this.cellRow = 0;
-    this.cellMap = new Array();
+    this.cellCurrent = {row:0, col:0}
+    this.cellMap = [];
+    this.stack = [];
   };
   
   center(canvasWidth, canvasHeight){
@@ -36,8 +36,8 @@ class Maze {
 
   checkNeighborsNonVisited(cellMap){
     var nonVisitedCell = [];
-    var y = this.cellRow;
-    var x = this.cellCol;
+    var y = this.cellCurrent.row;
+    var x = this.cellCurrent.col;
     var top = y - 1;
     var right = x + 1;
     var down = y + 1;
@@ -72,7 +72,12 @@ class Maze {
 
   step(){
     //Set the current cell as visited
-    this.cellMap[this.cellRow][this.cellCol].visited = true;
+    this.cellMap[this.cellCurrent.row][this.cellCurrent.col].visited = true;
+    
+    //Set te current cell as current active cell.    
+    this.cellMap[this.cellCurrent.row][this.cellCurrent.col].current = true;
+    
+    console.log(this.cellMap[this.cellCurrent.row][this.cellCurrent.col]);
     
     //Check who neighbors are disponible to move
     var nonVisitedCell = this.checkNeighborsNonVisited(this.cellMap);
@@ -82,14 +87,19 @@ class Maze {
       var randomIndex = getRandomInt(0, nonVisitedCell.length - 1);
       var nextCell = nonVisitedCell[randomIndex];
       // Chenge the cellCurrentRow and cellCurrentCol with the new value.
-      this.cellRow = nextCell.y;
-      this.cellCol = nextCell.x;
-    } else {
-      this.cellMap[this.cellRow][this.cellCol].color_visited.r = 255;
-      this.cellMap[this.cellRow][this.cellCol].color_visited.g = 0;
-      this.cellMap[this.cellRow][this.cellCol].color_visited.b = 0;
-    }
+      this.cellCurrent.row = nextCell.y;
+      this.cellCurrent.col = nextCell.x;
+      
+      //Put this cell in the stack
+      this.stack.push(this.cellMap[this.cellCurrent.row][this.cellCurrent.col]);
 
+    } else {
+      var prevCell = this.stack.pop();
+      if (this.stack.length > 0) {
+        this.cellCurrent.row = prevCell.y
+        this.cellCurrent.col = prevCell.x
+      }
+    }
   }
 
   show(){
@@ -97,6 +107,9 @@ class Maze {
       for (var col = 0; col < this.cellMap[row].length; col++) {
         // Draw the cell in canvas
         this.cellMap[row][col].show();
+
+        // Set current cell in false to reset all cels and put the current again.
+        this.cellMap[row][col].current = false;
       }
     }
   }

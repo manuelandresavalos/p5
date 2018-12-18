@@ -1,23 +1,26 @@
 class Cell {
   constructor(options) {
     let defaults = {
+      id: '',
       x: 0,
       y: 0,
       size: 20,
+      current: false,
       visited: false,
-      color: {r:200,g:200,b:200},
-      color_visited: {r:102,g:0,b:153, a: 100}
+      color: {r:200, g:200, b:200},
+      color_current: {r:255, g:0, b:0, a:100},
+      color_visited: {r:102, g:0, b:153, a: 100}
     };
 
     this.x = options.x || defaults.x;
     this.y = options.y || defaults.y;
     this.size = options.size || defaults.size;
+    this.current = options.current || defaults.current;
     this.visited = options.visited || defaults.visited;
     this.color = options.color || defaults.color;
+    this.color_current = options.color_current || defaults.color_current;
     this.color_visited = options.color_visited || defaults.color_visited;
 
-    //this.x = (this.x * this.size);
-    //this.y = (this.y * this.size);
     this.updateWalls();
   };
 
@@ -72,6 +75,14 @@ class Cell {
     if (this.visited) {
       noStroke();
       fill(this.color_visited.r, this.color_visited.g, this.color_visited.b, this.color_visited.a);
+      rect(this.x * this.size, this.y * this.size, this.size, this.size);
+      noFill();
+    }
+    //console.log("this.current:", this.current);
+    if (this.current) {
+      //console.log("current:", this.current);
+      noStroke();
+      fill(this.color_current.r, this.color_current.g, this.color_current.b, this.color_current.a);
       rect(this.x * this.size, this.y * this.size, this.size, this.size);
       noFill();
     }
