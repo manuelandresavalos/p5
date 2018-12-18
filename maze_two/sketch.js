@@ -15,14 +15,14 @@ function setup() {
 	maze.generate();
   maze.show();
 
-  frameRate(1);
+  //frameRate(5);
 }
 
 function draw() {
 	//Center the Maze on the middle of the stage
-	//maze.center(canvasWidth, canvasHeight);
-		
-	//Update the maze
-	//maze.step();
-  //maze.show();
+	maze.center(canvasWidth, canvasHeight);
+	background(51);
+
+	maze.step();
+  maze.show();
 }
