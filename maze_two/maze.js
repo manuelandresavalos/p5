@@ -4,37 +4,20 @@ class Maze {
     let defaults = {
       cols: 20,
       rows: 20,
-      cell:{
-        size: 20,
-        visited: false,
-        color: {r:71,g:71,b:71},
-        color_visited: {r:200,g:200,b:51, a: 50},
-        wallUp:{},
-        wallRight:{},
-        wallDown:{},
-        wallLeft:{},
-      },
-      wall:{
-        type:'wall',
-        color: {r:100,g:100,b:100},
-        size: 1,
-        x: 0,
-        y: 0
-      }
+      cellSize: 20
     };
 
     // Options settings
     this.cols = options.cols || defaults.cols;
     this.rows = options.rows || defaults.rows;
-    this.cell = options.cell || defaults.cell;
-    this.wall = options.wall || defaults.wall;
+    this.cellSize = options.cellSize || defaults.cellSize;
     this.cellMap = new Array();
   };
   
   center(canvasWidth, canvasHeight){
     let pos = {
-      x: ((canvasWidth - (this.cols * this.cell.size)) / 2),
-      y: ((canvasHeight - (this.rows * this.cell.size)) / 2)
+      x: ((canvasWidth - (this.cols * this.cellSize)) / 2),
+      y: ((canvasHeight - (this.rows * this.cellSize)) / 2)
     }
     translate(pos.x, pos.y)
     //return pos;
@@ -52,7 +35,9 @@ class Maze {
     for (var row = 0; row < this.rows; row++) {
       this.cellMap[row] = new Array();
       for (var col = 0; col < this.cols; col++) {
-        this.cellMap[row][col] = this.cell;
+        var cell = new Cell({x: col, y:row, size:this.cellSize});
+        this.cellMap[row][col] = cell;
+        console.log(this.cellMap[row][col]);
       }
     }
   };
@@ -61,13 +46,19 @@ class Maze {
     //code here
   }
 
+  drawCell(cell){
+    stroke(cell.color.r, cell.color.g, cell.color.b);
+    line(cell.wallUp.x1, cell.wallUp.y1, cell.wallUp.x2, cell.wallUp.y2);
+    line(cell.wallRight.x1, cell.wallRight.y1, cell.wallRight.x2, cell.wallRight.y2);
+    line(cell.wallDown.x1, cell.wallDown.y1, cell.wallDown.x2, cell.wallDown.y2);
+    line(cell.wallLeft.x1, cell.wallLeft.y1, cell.wallLeft.x2, cell.wallLeft.y2);
+  }
+
   show(){
     for (var row = 0; row < this.cellMap.length; row++) {
       for (var col = 0; col < this.cellMap[row].length; col++) {
         // Draw the cell in canvas
-        noStroke();
-        fill(this.cell.color.r, this.cell.color.g, this.cell.color.b);
-        rect(this.cell.size * col, this.cell.size * row, this.cell.size, this.cell.size);
+        this.drawCell(this.cellMap[row][col]);
       }
     }
   }

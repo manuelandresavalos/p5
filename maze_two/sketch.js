@@ -11,7 +11,7 @@ function setup() {
   background(51);
 
 	//Center the Maze on the middle of the stage
-	maze.center(canvasWidth, canvasHeight);
+	maze.center(canvasWidth, canvasHeight); //<- fix this
 	maze.generate();
   maze.show();
 
@@ -20,9 +20,9 @@ function setup() {
 
 function draw() {
 	//Center the Maze on the middle of the stage
-	maze.center(canvasWidth, canvasHeight);
+	//maze.center(canvasWidth, canvasHeight);
 		
 	//Update the maze
-	maze.step();
-  maze.show();
+	//maze.step();
+  //maze.show();
 }
