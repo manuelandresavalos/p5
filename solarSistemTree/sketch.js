@@ -23,14 +23,14 @@ function setup() {
   sun.show();
 
   //Generate Planets
-  for (var i = 0; i < countPlanets; i++) {
-    var angle = getRandomInt(0, 360);
-    var radius = (getRandomInt(15, 40));
+  for (let i = 0; i < countPlanets; i++) {
+    let angle = getRandomInt(0, 360);
+    let radius = (getRandomInt(15, 40));
 
-    var orbitRadius = (maxDistanceOrbit / countPlanets);
+    let orbitRadius = (maxDistanceOrbit / countPlanets);
     orbitRadius = orbitRadius * (i + 1);
 
-    var orbitSpeed = 0.50;
+    let orbitSpeed = 0.50;
     orbitSpeed = orbitSpeed / ((i+1)*7);
 
 
