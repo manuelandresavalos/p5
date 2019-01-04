@@ -19,46 +19,91 @@ REFERENCE:
 Variables: A B
 Axiom: A
 Rules: (A -> AB), (B -> A) 
+
+// rules[0] = { a: "A", b: "ABC" };
+// rules[1] = { a: "B", b: "A" };
+// rules[2] = { a: "C", b: "CFF" };
 */
 
-var axiom = "A";
+
+/*
+Variables: F+-[]
+Axiom: F
+Rules: F -> FF+[+F-F-F]-[-F+F+F]
+
+// rules[0] = { a: "A", b: "ABC" };
+// rules[1] = { a: "B", b: "A" };
+// rules[2] = { a: "C", b: "CFF" };
+*/
+var axiom = "F";
 var sentence = axiom;
 var rules = [];
-rules[0] = { a: "A", b: "ABC" };
-rules[1] = { a: "B", b: "A" };
+var len = 100;
+var angle = 0.52;
+
+rules[0] = {
+  a: "F",
+  b: "FF+[+F-F-F]-[-F+F+F]"
+}
+
+
 
 function generate() {
-	var nextSentence = "";
-	for (var i = 0; i < sentence.length; i++) {
-		var current = sentence.charAt(i);
-		var found = false;
-		for (var j = 0; j < rules.length; j++) {
-			if (current == rules[j].a) {
-				found = true;
-				nextSentence += rules[j].b;
-				break;
-			} 
-		}
-		if (!found) {
-			nextSentence += current;
-		}
-	}
-	sentence = nextSentence;
-	createP(sentence);
+  var nextSentence = "";
+  len *=0.5;
+  for (var i = 0; i < sentence.length; i++) {
+    var current = sentence.charAt(i);
+    var found = false;
+    for (var j = 0; j < rules.length; j++) {
+      if (current == rules[j].a) {
+        found = true;
+        nextSentence += " " + rules[j].b;
+        break;
+      }
+    }
+    if (!found) {
+      nextSentence += current;
+    }
+  }
+  sentence = nextSentence;
+  createP(sentence);
+  turlte();
+}
+
+function turlte() {
+	background(51);
+	stroke(255, 100);
+	translate(width / 2, height);
+  for (var i = 0; i < sentence.length; i++) {
+    var current = sentence.charAt(i);
+
+    if (current == "F") {
+      line(0, 0, 0, -len);
+      translate(0, -len);
+    } else if (current == "+") {
+    	rotate(angle);
+    } else if (current == "-") {
+			rotate(-angle);
+    } else if (current == "[") {
+    	push();
+    } else if (current == "]") {
+			pop();
+    }
+  }
 }
 
 function setup() {
-  //No Canvas
-  noCanvas();
+  //Canvas
+  createCanvas(600, 600);
+  background(51);
 
   //Create a P html element and print axiom
   createP(axiom);
 
+  //draw with instructions.
+  turlte();
+
   // Create a button and added mousePressed event and trigger generate
   var button = createButton("generate");
   button.mousePressed(generate);
-}
-
-function draw() {
-	//Code here
 }
