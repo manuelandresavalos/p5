@@ -24,7 +24,7 @@ Rules: (A -> AB), (B -> A)
 var axiom = "A";
 var sentence = axiom;
 var rules = [];
-rules[0] = { a: "A", b: "AB" };
+rules[0] = { a: "A", b: "ABC" };
 rules[1] = { a: "B", b: "A" };
 
 function generate() {
@@ -34,6 +34,7 @@ function generate() {
 		var found = false;
 		for (var j = 0; j < rules.length; j++) {
 			if (current == rules[j].a) {
+				found = true;
 				nextSentence += rules[j].b;
 				break;
 			} 
@@ -47,9 +48,13 @@ function generate() {
 }
 
 function setup() {
-  //Code here
+  //No Canvas
   noCanvas();
+
+  //Create a P html element and print axiom
   createP(axiom);
+
+  // Create a button and added mousePressed event and trigger generate
   var button = createButton("generate");
   button.mousePressed(generate);
 }
