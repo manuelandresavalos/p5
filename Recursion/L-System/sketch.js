@@ -40,13 +40,12 @@ var sentence = axiom;
 var rules = [];
 var len = 100;
 var angle = 0.52;
+var alphaFade = 67;
 
 rules[0] = {
   a: "F",
   b: "FF+[+F-F-F]-[-F+F+F]"
 }
-
-
 
 function generate() {
   var nextSentence = "";
@@ -57,7 +56,7 @@ function generate() {
     for (var j = 0; j < rules.length; j++) {
       if (current == rules[j].a) {
         found = true;
-        nextSentence += " " + rules[j].b;
+        nextSentence +=rules[j].b;
         break;
       }
     }
@@ -72,11 +71,11 @@ function generate() {
 
 function turlte() {
 	background(51);
-	stroke(255, 100);
+  resetMatrix();
 	translate(width / 2, height);
+  stroke(255, alphaFade);
   for (var i = 0; i < sentence.length; i++) {
     var current = sentence.charAt(i);
-
     if (current == "F") {
       line(0, 0, 0, -len);
       translate(0, -len);
