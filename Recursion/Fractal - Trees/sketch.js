@@ -2,6 +2,7 @@ var angle = 0;
 var leftFactorLeng = 0.69;
 var rightFactorLeng = 0.69;
 var startTrunkLeng = 100;
+var angleSlider;
 var trunkSlider;
 var leftFactorSlider;
 var rightFactorSlider;
@@ -20,6 +21,9 @@ function setup() {
 	rightFactorSlider = createSlider(0, 80, 67);
 	rightFactorSlider.position(10, 70);
 
+  angleSlider = createSlider(0, PI / 2, PI / 4, 0.01);
+  angleSlider.position(10, 100);
+
 }
 
 function draw() {
@@ -27,9 +31,9 @@ function draw() {
   startTrunkLeng = trunkSlider.value();
   leftFactorLeng = leftFactorSlider.value() / 100;
 	rightFactorLeng = rightFactorSlider.value() / 100;
+  angle = angleSlider.value();
 
 	// Some variables
-  angle = PI / 4;
   translate(300, height);
   background(51);
 	stroke(255);
