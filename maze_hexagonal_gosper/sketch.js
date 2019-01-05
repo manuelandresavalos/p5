@@ -47,11 +47,17 @@ function turlte(gen) {
   resetMatrix();
   translate(translateX, translateY);
   stroke(255, alphaFade);
-  
+  var color ={r:0,g:0,b:0};
+
   for (var i = 0; i < gen.length; i++) {
     var current = gen.charAt(i);
     if (current == "F" || current == "L" || current == "R") {
-      if (Math.ceil(random(complexMaze)) > 1) {
+      var numRandom = Math.ceil(random(complexMaze));
+      color.r = Math.ceil(random(255));
+      color.g = Math.ceil(random(255));
+      color.b = Math.ceil(random(255));
+      if (numRandom > 1) {
+        stroke(color.r,color.g,color.b);
         line(0, 0, len, 0);
       }
       translate(len, 0);
