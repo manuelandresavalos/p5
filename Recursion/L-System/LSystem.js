@@ -102,7 +102,6 @@ class LSystem {
   }
 
   turlte() {
-    
     for (var i = 0; i < this.gen.length; i++) {
       var current = this.gen.charAt(i);
       if (current === "F" || current === "L" || current === "R") {
@@ -122,6 +121,12 @@ class LSystem {
         push();
       } else if (current == "]") {
         pop();
+      } else if (current == "#") {
+        this.strokeWeight++;
+      } else if (current == "!") {
+        this.strokeWeight--;
+      } else if (current == "@") {
+        ellipse(0, 0, this.strokeWeight, this.strokeWeight);
       }
     }
   }
