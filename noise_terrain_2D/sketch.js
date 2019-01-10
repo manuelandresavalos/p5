@@ -7,11 +7,22 @@ var cells = [];
 
 function setup() {
   //Code here
-  createCanvas(2250, 1100);
+  createCanvas(2170, 1020);
 	background(51);
+
+	generateTerrain();
+	drawTerrain();
+}
+
+function inRange(x, min, max) {
+    return ((x-min)*(x-max) <= 0);
 }
 
 function draw(){
+
+}
+
+function generateTerrain() {
 	xoff = 0;
 	for (var x = 0; x < width/cellSize; x++) {
 		cells[x] = [];
@@ -19,34 +30,30 @@ function draw(){
 		for (var y = 0; y < height/cellSize; y++) {
 			var randomNoise = map(noise(xoff, yoff), 0, 1, 0, 100);
 		
-			if (randomNoise >= 70) {
+			if (inRange(randomNoise, 70, 100)) {
 				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"snow"});
-			}
-
-			if (randomNoise < 70 && randomNoise >= 60) {
+			} else if (inRange(randomNoise, 65, 70)) {
 				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"mount_top"});
-			}
-
-			if (randomNoise < 60 && randomNoise >= 50) {
+			} else if (inRange(randomNoise, 60, 65)) {
+				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"mount_middle"});
+			} else if (inRange(randomNoise, 50, 60)) {
 				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"mount_base"});
-			}
-
-			if (randomNoise < 50 && randomNoise >= 35) {
+			} else if (inRange(randomNoise, 35, 50)) {
 				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"grass"});
-			}
-
-			if (randomNoise < 35 && randomNoise >= 30) {
+			} else if (inRange(randomNoise, 30, 35)) {
 				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"desert"});
-			}
-
-			if (randomNoise < 30) {
+			} else if (inRange(randomNoise, 20, 30)) {
 				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"water"});
+			} else if (inRange(randomNoise, 0, 20)) {
+				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"water_deeper"});
 			}
 			yoff += inc;	
 		}
 		xoff += inc;
 	}
+}
 
+function drawTerrain() {
 	for (var x = 0; x < width/cellSize; x++) {
 		for (var y = 0; y < height/cellSize; y++) {
 			cells[x][y].show();
