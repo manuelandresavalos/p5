@@ -7,7 +7,7 @@ var cells = [];
 
 function setup() {
   //Code here
-  createCanvas(600, 600);
+  createCanvas(2250, 1100);
 	background(51);
 }
 
@@ -31,11 +31,11 @@ function draw(){
 				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"mount_base"});
 			}
 
-			if (randomNoise < 50 && randomNoise >= 40) {
+			if (randomNoise < 50 && randomNoise >= 35) {
 				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"grass"});
 			}
 
-			if (randomNoise < 40 && randomNoise >= 30) {
+			if (randomNoise < 35 && randomNoise >= 30) {
 				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"desert"});
 			}
 
