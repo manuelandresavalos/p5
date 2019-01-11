@@ -1,55 +1,56 @@
-// EXAMPLE FROM: https://www.youtube.com/watch?v=ikwNrFvnL3g
-var inc = 0.05;
+// EXAMPLE FROM: 
+// https://www.youtube.com/watch?v=ikwNrFvnL3g
+// https://youtu.be/y7sgcFhk6ZM?t=513
+var inc = 0.02;
 var cellSize = 10;
 var xoff = 0.0;
 var yoff = 0.0;
 var cells = [];
-
+var biomes = [];
+var biomeTest;
 function setup() {
   //Code here
-  createCanvas(2170, 1020);
+  //createCanvas(2170, 1020);
+  createCanvas(1800, 920);
 	background(51);
 
+	biomes.push({lowest:-20, highest:120, inc:0.05, name:'Plants'});
+	biomes.push({lowest: 0, highest:130, inc:0.05, name:'Mountains'});
+	biomes.push({lowest:-20, highest:40, inc:0.05, name:'Islands'});
+	biomes.push({lowest: -10, highest:20, inc:0.05, name:'Ocean'});
+	biomes.push({lowest: 45, highest:120, inc:0.05, name:'Terra'});
+	biomes.push({lowest: 90, highest:120, inc:0.05, name:'Glaciar'});
+	biomes.push({lowest: 80, highest:110, inc:0.05, name:'Snow'});
+	biomes.push({lowest: 20, highest:50, inc:0.05, name:'Sabana'});
+	biomes.push({lowest:-20, highest:70, inc:0.05, name:'Continents'});
+	biomes.push({lowest:-20, highest:60, inc:0.02, name:'Large Coasts'});
+	biomeTest = -1;
+	//biomeTest = biomes.length - 1;
 	generateTerrain();
 	drawTerrain();
 }
 
-function inRange(x, min, max) {
-    return ((x-min)*(x-max) <= 0);
-}
-
-function draw(){
-
-}
-
 function generateTerrain() {
+	var selectBiome = Math.round(random(biomes.length));
+	
+	if (biomeTest >= 0) {
+		selectBiome = biomeTest;
+	}
+
+	console.log(biomes[selectBiome].name);
 	xoff = 0;
 	for (var x = 0; x < width/cellSize; x++) {
 		cells[x] = [];
 		yoff = 0;
 		for (var y = 0; y < height/cellSize; y++) {
-			var randomNoise = map(noise(xoff, yoff), 0, 1, 0, 100);
-		
-			if (inRange(randomNoise, 70, 100)) {
-				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"snow"});
-			} else if (inRange(randomNoise, 65, 70)) {
-				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"mount_top"});
-			} else if (inRange(randomNoise, 60, 65)) {
-				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"mount_middle"});
-			} else if (inRange(randomNoise, 50, 60)) {
-				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"mount_base"});
-			} else if (inRange(randomNoise, 35, 50)) {
-				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"grass"});
-			} else if (inRange(randomNoise, 30, 35)) {
-				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"desert"});
-			} else if (inRange(randomNoise, 20, 30)) {
-				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"water"});
-			} else if (inRange(randomNoise, 0, 20)) {
-				cells[x][y] = new Cell({x:x, y:y,size:cellSize,type:"water_deeper"});
-			}
-			yoff += inc;	
+			var randomNoise = map(noise(xoff, yoff), 0, 1, biomes[selectBiome].lowest, biomes[selectBiome].highest);
+			var typeLevel = Math.ceil(randomNoise / 10);
+
+			cells[x][y] = new Cell({x:x, y:y,size:cellSize,typeLevel:typeLevel});
+			
+			yoff += biomes[selectBiome].inc;
 		}
-		xoff += inc;
+		xoff += biomes[selectBiome].inc;
 	}
 }
 
