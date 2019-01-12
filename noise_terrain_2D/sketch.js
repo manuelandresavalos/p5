@@ -19,11 +19,12 @@ function setup() {
 	biomes.push({lowest:-20, highest:40, inc:0.05, name:'Islands'});
 	biomes.push({lowest: -10, highest:20, inc:0.05, name:'Ocean'});
 	biomes.push({lowest: 45, highest:120, inc:0.05, name:'Terra'});
-	biomes.push({lowest: 90, highest:120, inc:0.05, name:'Glaciar'});
 	biomes.push({lowest: 80, highest:110, inc:0.05, name:'Snow'});
 	biomes.push({lowest: 20, highest:50, inc:0.05, name:'Sabana'});
 	biomes.push({lowest:-20, highest:70, inc:0.05, name:'Continents'});
-	biomes.push({lowest:-20, highest:60, inc:0.02, name:'Large Coasts'});
+	biomes.push({lowest:-20, highest:60, inc:0.03, name:'Large Coasts'});
+	biomes.push({lowest:-70, highest:70, inc:0.05, name:'Deeper Islands'});
+	biomes.push({lowest: 90, highest:120, inc:0.05, name:'Glaciar'});
 	biomeTest = -1;
 	//biomeTest = biomes.length - 1;
 	generateTerrain();
@@ -31,7 +32,8 @@ function setup() {
 }
 
 function generateTerrain() {
-	var selectBiome = Math.round(random(biomes.length));
+	//Select a biome randomly
+	var selectBiome = Math.round(random(biomes.length - 1)); // returns 0,1,2 ... N
 	
 	if (biomeTest >= 0) {
 		selectBiome = biomeTest;

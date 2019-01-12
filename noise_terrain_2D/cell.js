@@ -13,17 +13,18 @@ class Cell {
     this.typeLevel = options.typeLevel || defaults.typeLevel;
 
     this.colors = [];
-    this.colors[10] = this.rgb(254,254,254);  // Snow
-    this.colors[9] = this.rgb(221,183,135);  // top mountain
-    this.colors[8] = this.rgb(204,132,64);    // middle mountain
-    this.colors[7] = this.rgb(177,91,51);     // base mountain
-    this.colors[6] = this.rgb(159,81,45);     // 
-    this.colors[5] = this.rgb(45,204,55);     // top grass
-    this.colors[4] = this.rgb(166,202,1);     // base grass
-    this.colors[3] = this.rgb(254,254,204);   // sand
-    this.colors[2] = this.rgb(9,191,253);     // top water
-    this.colors[1] = this.rgb(48,147,255);    // middle water
-    this.colors[0] = this.rgb(0,111,233);     // base water
+    this.colors[11] = this.rgb(254,254,254);  // Snow
+    this.colors[10] = this.rgb(230,230,230);  // Dirty Snow
+    this.colors[9] = this.rgb(221,183,135);   // Top mountain
+    this.colors[8] = this.rgb(204,132,64);    // Middle mountain
+    this.colors[7] = this.rgb(177,91,51);     // Base up mountain
+    this.colors[6] = this.rgb(159,81,45);     // Base mountain
+    this.colors[5] = this.rgb(45,204,55);     // Top grass
+    this.colors[4] = this.rgb(166,202,1);     // Base grass
+    this.colors[3] = this.rgb(254,254,204);   // Sand
+    this.colors[2] = this.rgb(9,191,253);     // Top water
+    this.colors[1] = this.rgb(48,147,255);    // Middle water
+    this.colors[0] = this.rgb(0,111,233);     // Base water
   };
   
   rgb(r, g, b) {
