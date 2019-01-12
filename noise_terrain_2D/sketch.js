@@ -23,18 +23,19 @@ function setup() {
 
 	biome = new Biomes(); // if arguments exist (0 to 10) get the biome selected, if args is empty the biome is selected Randomly
 	terrain = new TerrainGenerator(biome, canvasW, canvasH);
-	terrain.generate();
+	terrain.generate()
 	terrain.show();
+
+	showTitle(biome.name+' - '+biome.index);
 }
 
 
-function showTitle() {
-	var title = biomes[selectedBiome].name;
+function showTitle(title) {
 	var tsize = 14;
 
 	fill(255);
 	noStroke();
-	rect(10, 10, 120, 19);
+	rect(10, 10, 128, 19);
 	
 	fill(0);
 	textSize(tsize);
