@@ -9,15 +9,14 @@ var cells = [];
 var biome;
 var terrain;
 
-var canvasW = 1800;
-var canvasH = 920;
+var canvasW = 600;
+var canvasH = 600;
 
 const CENTER_X = canvasW / 2 ;
 const CENTER_Y = canvasH / 2 ;
 
 function setup() {
   //Code here
-  //createCanvas(2170, 1020);
   createCanvas(canvasW, canvasH);
 	background(51);
 
@@ -28,8 +27,22 @@ function setup() {
 	terrain.show();
 
 	showTitle(biome.name+' - '+biome.index);
+
+	createP();
+	var regenerateMap = createButton("Generate");
+  regenerateMap.mousePressed(regenMap);
 }
 
+function regenMap(){
+	background(51);
+	terrain.clear();
+	biome = new Biomes();
+	terrain = new TerrainGenerator(biome, canvasW, canvasH);
+	terrain.start = random(1000) * 100;
+	terrain.generate();
+	terrain.show();
+	showTitle(biome.name+' - '+biome.index);
+}
 
 function showTitle(title) {
 	var tsize = 14;

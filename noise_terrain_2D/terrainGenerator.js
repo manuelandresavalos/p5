@@ -18,16 +18,17 @@ class TerrainGenerator {
 
 		this.xoff = 0;
 		this.yoff = 0;
+		this.start = 0;
 		this.cellMap = [];
 		this.cells = [];
 	}
 
 	generate(){
 		this.inc = this.biome.inc || this.inc;
-		this.xoff = 0;
+		this.xoff = this.start;
 		for (var x = 0; x < this.canvasW/this.cellSize; x++) {
 			this.cellMap[x] = [];
-			this.yoff = 0;
+			this.yoff = this.start;
 			for (var y = 0; y < this.canvasH/this.cellSize; y++) {
 				var noiseValue = noise(this.xoff, this.yoff);
 				var minNoiseMap = this.biome.lowest || this.minNoiseMap;
@@ -45,7 +46,17 @@ class TerrainGenerator {
 		return this.cellMap;
 	}
 
+	clear(){
+		this.cellMap.length = 0;
+		this.cells.length = 0;
+	}
+
 	show(){
+		if (this.cellMap.length == 0) {
+			console.log("We don't have cells to show");
+			return false;
+		}
+		stroke(0);
 		for (var x = 0; x < this.canvasW/this.cellSize; x++) {
 			this.cells[x] = [];
 			for (var y = 0; y < this.canvasH/this.cellSize; y++) {
