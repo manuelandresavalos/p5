@@ -9,10 +9,16 @@ var cells = [];
 var biomes = [];
 var selectedBiome = 0;
 
+var canvasW = 1800;
+var canvasH = 920;
+
+const CENTER_X = canvasW / 2 ;
+const CENTER_Y = canvasH / 2 ;
+
 function setup() {
   //Code here
   //createCanvas(2170, 1020);
-  createCanvas(1800, 920);
+  createCanvas(canvasW, canvasH);
 	background(51);
 
 	biomes.push({lowest:-20, highest:120, inc:0.05, name:'Plants'});
@@ -30,6 +36,7 @@ function setup() {
 	selectBiome();
 	generateTerrain();
 	drawTerrain();
+	showTitle();
 }
 
 function selectBiome(biome = -1) {
@@ -38,9 +45,20 @@ function selectBiome(biome = -1) {
 	selectedBiome = biome > -1 ? biome : selectedBiome;
 }
 
-function generateTerrain() {
+function showTitle() {
+	var title = biomes[selectedBiome].name;
+	var tsize = 14;
 
-	console.log(biomes[selectedBiome].name);
+	fill(255);
+	noStroke();
+	rect(10, 10, 120, 19);
+	
+	fill(0);
+	textSize(tsize);
+	text(title, 15, 25);
+}
+
+function generateTerrain() {
 	xoff = 0;
 	for (var x = 0; x < width/cellSize; x++) {
 		cells[x] = [];
