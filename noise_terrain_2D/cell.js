@@ -13,8 +13,8 @@ class Cell {
     this.typeLevel = options.typeLevel || defaults.typeLevel;
 
     this.colors = [];
-    this.colors[11] = this.rgb(254,254,254);  // Snow
-    this.colors[10] = this.rgb(230,230,230);  // Dirty Snow
+    this.colors[11] = this.rgb(254,254,254);  // Top Snow
+    this.colors[10] = this.rgb(230,230,230);  // Base Snow
     this.colors[9] = this.rgb(221,183,135);   // Top mountain
     this.colors[8] = this.rgb(204,132,64);    // Middle mountain
     this.colors[7] = this.rgb(177,91,51);     // Base up mountain
