@@ -31,10 +31,6 @@ class Cell {
     return {r:r, g:g, b:b};
   }
 
-  delete() {
-    delete(this);
-  }
-
   show(){
     if (this.typeLevel >= this.colors.length) {
       this.typeLevel = this.colors.length - 1;
