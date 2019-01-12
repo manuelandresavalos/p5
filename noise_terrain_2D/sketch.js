@@ -21,9 +21,10 @@ function setup() {
   createCanvas(canvasW, canvasH);
 	background(51);
 
-	biome = new Biomes(); // if arguments exist (0 to 10) get the biome selected, if args is empty the biome is selected Randomly
+	// if args [0 .. 10] return bioma selected, otherwise return a biome random
+	biome = new Biomes();
 	terrain = new TerrainGenerator(biome, canvasW, canvasH);
-	terrain.generate()
+	terrain.generate();
 	terrain.show();
 
 	showTitle(biome.name+' - '+biome.index);

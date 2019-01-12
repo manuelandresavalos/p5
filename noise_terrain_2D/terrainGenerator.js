@@ -8,9 +8,9 @@ class TerrainGenerator {
 		inc = 0.01,
 		cellSize = 10) 
 	{
+		this.biome = biome;
 		this.canvasW = canvasW;
 		this.canvasH = canvasH;
-		this.biome = biome;
 		this.minNoiseMap = minNoiseMap;
 		this.maxNoiseMap = maxNoiseMap;
 		this.inc = inc;
@@ -50,12 +50,18 @@ class TerrainGenerator {
 			this.cells[x] = [];
 			for (var y = 0; y < this.canvasH/this.cellSize; y++) {
 				var level = this.cellMap[x][y];
+				if (level >= this.biome.levels.length) {
+		      level = this.biome.levels.length - 1;
+		    } else if (level <= 0) {
+		      level = 0;
+		    }
 
+				var rgbObj = this.biome.levels[level];
 				this.cells[x][y] = new Cell({
 					x: x, 
 					y: y,
 					size: this.cellSize,
-					typeLevel: level
+					rgb: rgbObj
 				});
 				
 				this.cells[x][y].show();
