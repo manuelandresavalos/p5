@@ -35,16 +35,16 @@ class Bubbles {
 
     edgesInfinite(){
         if (this.location.x >= width+this.radius) {
-            this.location.mult(0);
+            //this.location.mult(0);
             this.location.x = -this.radius;
         }
         if (this.location.x < -this.radius) {
-            this.location.mult(0);
+            //this.location.mult(0);
             this.location.x = width+this.radius;
         }
 
         if (this.location.y < -this.radius) {
-            this.location.mult(0);
+            //this.location.mult(0);
             this.location.y = height+this.radius;
         }
     }
