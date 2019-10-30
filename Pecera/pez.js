@@ -9,8 +9,6 @@ class Pez {
         this.location = createVector(random(0,width),random(0,height));
         this.velocity = createVector();
         this.acceleration = createVector();
-        this.angle = 0;
-        this.headOrientation = 1;
         
         this.imgPez = imgsPeces[this.name];
         this.historyLocation;
@@ -28,11 +26,9 @@ class Pez {
         
         fill(this.color.r, this.color.g, this.color.b);
         translate(this.location.x, this.location.y); //this translate all the canvas
-        rotate(this.angle) // this rotate all the canvas
         imageMode(CENTER); 
         scale(this.headOrientation, 1);
         image(this.imgPez, 0, 0); // Print the image on x:0 and y:0 from translated and rotated canvas
-        
         
         //circle(this.location.x, this.location.y, this.radius);
         //rectMode(CENTER)
@@ -87,20 +83,20 @@ class Pez {
         }
     }
 
-    headOrientation(){
-        var posX = Math.ceil(this.location.x);
+    getOrientation(){
+        var actualPosX = Math.ceil(this.location.x);
         
-        if (this.historyLocation == ''){
-            this.historyLocation = posX;
+        if (this.historyLocation == undefined){
+            this.historyLocation = actualPosX;
         }
         
-        console.log(posX, this.historyLocation)
-        if (posX <= this.historyLocation) {
-            this.angle = 0;
-        } else {
-            this.angle = 180;
+        if (actualPosX < this.historyLocation) {
+            this.headOrientation = 1;
+        } 
+        if (actualPosX > this.historyLocation) {
+            this.headOrientation = -1;
         }
-        this.historyLocation = posX;
+        this.historyLocation = actualPosX;
     }
 
     keyboardControl(){

@@ -11,7 +11,7 @@ var pecesArr = [];
 var bubblesArr = [];
 var world = {};
 var cantPeces = 15;
-var cantBubbles = 50;
+var cantBubbles = 80;
 
 // Precarga de imagenes
 var backgroundImage;
@@ -33,7 +33,7 @@ function setup(){
     canvasW = ratioObj.width;
 
     createCanvas(canvasW, canvasH);
-    
+
     background(51);
 
     angleMode(DEGREES);
@@ -64,6 +64,7 @@ function draw(){
         pecesArr[i].applyForce(createVector(0, map(random(0,100), 0 , 100, -0.02, 0.02)));
         pecesArr[i].applyForce(createVector(map(random(0,100), 0 , 100, -0.09, 0.09), 0));
         pecesArr[i].edgesBounce();
+        pecesArr[i].getOrientation();
         //pecesArr[i].edgesInfinite();
         pecesArr[i].update();
         pecesArr[i].show();
