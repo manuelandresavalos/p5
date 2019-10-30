@@ -23,16 +23,11 @@ class Pez {
 
     show(){
         push() // start changing attributes
-        
         fill(this.color.r, this.color.g, this.color.b);
         translate(this.location.x, this.location.y); //this translate all the canvas
         imageMode(CENTER); 
         scale(this.headOrientation, 1);
         image(this.imgPez, 0, 0); // Print the image on x:0 and y:0 from translated and rotated canvas
-        
-        //circle(this.location.x, this.location.y, this.radius);
-        //rectMode(CENTER)
-        //rect(0,0, 25, 10)
         pop() // put all attributes by default again
     }
 

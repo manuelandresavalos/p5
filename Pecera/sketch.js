@@ -4,14 +4,14 @@ config = {
     gravity: 0.0981,
     horizontalWind: 0.15,
     verticalWind: 0.0,
-    forceKeys: 0.20
+    forceKeys: 0.20,
+    cantPeces: 15,
+    cantBubbles: 80
 }
 
 var pecesArr = [];
 var bubblesArr = [];
 var world = {};
-var cantPeces = 15;
-var cantBubbles = 80;
 
 // Precarga de imagenes
 var backgroundImage;
@@ -42,13 +42,13 @@ function setup(){
     world.horizontalWind = createVector(config.horizontalWind);
     
     //Genero Peces
-    for (var i=0; i<cantPeces; i++) {
+    for (var i=0; i<config.cantPeces; i++) {
         var model = Math.floor(random(peces.length))
         pecesArr.push(new Pez(peces[model]))
     }
     
     //Genero Bublles
-    for (var i=0; i<cantBubbles; i++) {
+    for (var i=0; i<config.cantBubbles; i++) {
         bubblesArr.push(new Bubbles())
     }
 }
